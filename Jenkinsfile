@@ -80,9 +80,9 @@ pipeline {
                     container('maven') {
                       withCredentials([file(credentialsId: 'kubeconfig', variable: 'config')]) {
                         sh 'curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"'
-                        sh 'echo "entrei"'
+                        sh 'chmod +x ./kubectl'
                         sh 'export KUBECONFIG=\${config}'
-                        sh 'kubectl apply -f deployment.yaml'
+                        sh './kubectl apply -f deployment.yaml'
                   }
                 }
                 }
