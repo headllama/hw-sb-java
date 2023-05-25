@@ -71,7 +71,7 @@ pipeline {
               stage('Kaniko') {
                 steps {
                     container('kaniko') {
-                      sh '/kaniko/executor --context `pwd` --destination $REGISTRY/$PROJETO:latest --force'
+                      sh '/kaniko/executor --context `pwd` --destination $REGISTRY/$PROJETO:1 --force'
                   }
                 }
               }
