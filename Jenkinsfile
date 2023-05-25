@@ -83,7 +83,6 @@ pipeline {
                         sh 'echo "entrei"'
                         sh 'export KUBECONFIG=\${config}'
                         sh 'kubectl apply -f deployment.yaml'
-                      '''
                   }
                 }
                 }
