@@ -44,11 +44,11 @@ pipeline {
 
     environment {
       PROJETO = 'helloworld-java'
-      NOME = 'Vittor'
-      EMAIL = 'contato@vittormaciel.com.br'
+      NOME = 'walber'
+      EMAIL = 'walber.silva@sysmap.com.br'
       NAMESPACE = 'jenkins-sandbox'
       PORTA = '8080'
-      REGISTRY = 'vittormaciel'
+      REGISTRY = 'walber7'
 
 
     }
@@ -78,9 +78,12 @@ pipeline {
               stage('Deploy') {
                 steps {
                     container('kubectl') {
-                      withKubeCredentials(kubectlCredentials: [[credentialsId: 'kubeconfigjenkins', serverUrl: 'https://192.168.58.2:8443']]) {
-                      sh 'export KUBECONFIG=$kubeconfigvittor'
-                      sh 'kubectl apply -f deployment.yaml'
+                      withCredentials([file(credentialsId: 'kubeconfig', variable: 'config')]) {
+                      sh """
+                        echo "entrei"
+                        export KUBECONFIG=\${config}
+                        kubectl apply -f deployment.yaml'
+                      """
                   }
                 }
                 }
