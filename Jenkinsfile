@@ -77,9 +77,10 @@ pipeline {
               }
               stage('Deploy') {
                 steps {
-                    container('kubectl') {
+                    container('maven') {
                       withCredentials([file(credentialsId: 'kubeconfig', variable: 'config')]) {
                       sh """
+                        curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
                         echo "entrei"
                         export KUBECONFIG=\${config}
                         kubectl apply -f deployment.yaml'
